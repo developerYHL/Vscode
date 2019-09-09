@@ -2,21 +2,18 @@ const express = require("express");
 const _ = require("lodash");
 const app = express();
 const user_router = require("./route/users");
-
-let users = [{
-    id: 1,
-    name: "홍길동"
-},{
-    id: 2,
-    name: "강철수"
-}];
-let user = "null";
+const board_router = require("./route/board")
 
 app.use(express.json()); 
 app.use(express.urlencoded({extended:true}));
 app.use("/users", user_router);
+app.use("/", board_router)
 
 app.listen(3000);
+
+app.get("/", (req, res) => {
+    res.send("hi");
+});
 
 // app.get("/", (req, res) => {
 //     let a= 10;
