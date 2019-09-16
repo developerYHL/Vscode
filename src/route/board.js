@@ -71,7 +71,7 @@ router.post("/", async(req, res)=> {
 
 });
 
-router.put("/:title", async(req, res) => {
+router.put("/:id", async(req, res) => {
     let result = false;
     try {
         await Board.update(
@@ -81,7 +81,7 @@ router.put("/:title", async(req, res) => {
                 viewcount: req.body.viewcount
             }, {
                 where: {
-                    title: req.params.title
+                    id: req.params.id
                 }
             }
         );
