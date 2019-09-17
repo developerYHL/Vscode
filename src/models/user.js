@@ -6,5 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
+    User.associate = function(models){
+        models.user.hasOne(models.board);
+    };
     return User;
 };

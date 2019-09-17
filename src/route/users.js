@@ -5,19 +5,6 @@ const models = require("../models");
 
 const User = models.user;
 
-User.sync({force:true}) .then(() => {
-    return User.create({
-        name: "홍길동",
-        address: "seoul"
-    });
-}).then( () => {
-    return User.create({
-        name: "김철수",
-        address: "anyang"
-    });
-});
-
-
 let users = [{
     id: 1,
     name: "홍길동"
