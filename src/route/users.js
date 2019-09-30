@@ -4,6 +4,7 @@ const _ = require("lodash");
 const models = require("../models");
 
 const User = models.user;
+const Board = models.board;
 
 let users = [{
     id: 1,
@@ -15,7 +16,8 @@ let users = [{
 
 router.get("/", async(req,res)=> {
     let result = await User.findAll({
-        attributes: ["name"]
+        attributes: ["name"],
+        include:[Board]
     });
     res.send(result);
 });
@@ -31,7 +33,8 @@ router.get("/address/:address", async(req,res)=> {
 router.post("/", async(req, res)=> {
     let result = false;
     try{
-        await User.create({ id: req.body.id, name: req.body.name, address: req.body.address });
+        let result_user = await User.create({name: req.body.name});
+        await result_user.createBoard({title: "Test", contents: "a", viewCount: 1});
         result = true;
     }catch(err){
         console.error(err);
